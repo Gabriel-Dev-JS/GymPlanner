@@ -24,4 +24,55 @@ class ExercicioControler:
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
+
+    @staticmethod
+    def excluirExercicio(id_exercicio):
+        try:
+            data = request.get_json()
+            id_exercicio = data.get('id_exercicio')
+
+            repository = Repository()
+            repository.removeExercicio(id_exercicio)
+
+            response = {
+                "message": "Exercicio excluido com sucesso"
+            }
+
+            return jsonify(response), 201
+        except Exception as e:
+            return jsonify({"error":str(e)}), 400 
+        
+    @staticmethod    
+    def AtualizarExercicio(id_exercicio):
+        try:
+
+            data = request.get_json()
+            exercicio = data.get('exercicio')
+            repeticao = data.get('repeticao')
+            serie = data.get('serie')
+
+            repository = Repository()
+            repository.updateExercio(exercicio, repeticao, serie, id_exercicio)
+
+            response = {
+                "message": "exercicio atualizado com sucesso",
+                "exercicio": exercicio,
+                "repeticao": repeticao,
+                "serie": serie
+            }
+
+            return jsonify(response), 201
+        
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
+
+    @staticmethod    
+    def listaExercicios(id_aluno):
+        try:
+            repository = Repository()
+            repository.findAllExercicio(id_aluno)
+
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 401
         

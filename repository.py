@@ -70,9 +70,9 @@ class Repository:
         self.cursor.execute(query)
         return self.cursor.fetchall()
    
-    def findAllExercicio(self):
-        query = "SELECT * FROM exercicio"
-        self.cursor.execute(query)
+    def findAllExercicio(self, id_aluno):
+        query = "SELECT * FROM exercicio WHERE id_aluno = ?"
+        self.cursor.execute(query, id_aluno)
         return self.cursor.fetchall()
 
     def updateAluno(self, nome, sobrenome, id_aluno):
