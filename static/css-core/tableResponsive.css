@@ -1,0 +1,139 @@
+table {
+    font-weight: 300;
+    border: 1px solid var(--td-border);
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+
+    box-shadow: var(--table-shadow);
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+
+
+table tr td {
+    border: 1px solid var(--td-border);
+    color: var(--text-color);
+    padding-block: 1rem;
+}
+
+table tr {
+    padding: .35em;
+}
+
+
+table tr:nth-child(even) {
+    background-color: var(--td-even);
+}
+
+table tr:nth-child(odd) {
+    background-color: var(--td-odd);
+}
+
+table thead tr {
+    background-color: var(--td-even) !important;
+    color: #526D82;
+}
+
+table tbody {
+    font-size: 0.89rem;
+}
+
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+
+table thead tr:first-child th,
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/* Rounding of the table edges */
+table thead tr:first-child {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+}
+
+table thead tr th:first-child {
+    border-top-left-radius: 12px !important;
+}
+
+table thead tr th:last-child {
+    border-top-right-radius: 12px !important;
+}
+
+table tbody tr:last-child {
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
+
+table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px !important;
+}
+
+table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px !important;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
