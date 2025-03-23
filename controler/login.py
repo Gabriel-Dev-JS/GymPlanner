@@ -1,4 +1,4 @@
-from flask import jsonify, redirect,request,Response, url_for
+from flask import jsonify, redirect,request, url_for
 from repository import Repository
 
 class Login:

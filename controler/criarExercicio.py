@@ -1,4 +1,4 @@
-from flask import jsonify,request,Response
+from flask import jsonify,request
 from repository import Repository
 
 class ExercicioControler:
