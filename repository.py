@@ -65,6 +65,11 @@ class Repository:
         self.cursor.execute(query, (exercicio, repeticao, serie, id_aluno))
         self.conexao.commit()
 
+    def findProfessor(self, nome, senha):
+        query = "SELECT * FROM professor WHERE nome=? and senha=?"
+        self.cursor.execute(query,(nome, senha))
+        return self.cursor.fetchone()
+
     def findAllAluno(self):
         query = "SELECT * FROM aluno"
         self.cursor.execute(query)
@@ -72,11 +77,11 @@ class Repository:
    
     def findAllExercicio(self, id_aluno):
         query = "SELECT * FROM exercicio WHERE id_aluno = ?"
-        self.cursor.execute(query, id_aluno)
+        self.cursor.execute(query, (id_aluno))
         return self.cursor.fetchall()
 
     def updateAluno(self, nome, sobrenome, id_aluno):
-        query = f"UPDATE aluno SET nome=?,sobrenome=? WHERE id_aluno=?"
+        query = "UPDATE aluno SET nome=?,sobrenome=? WHERE id_aluno=?"
         self.cursor.execute(query, (nome, sobrenome, id_aluno))
         self.conexao.commit()  
         

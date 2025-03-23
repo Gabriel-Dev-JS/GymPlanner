@@ -6,6 +6,10 @@ class ExercicioControler:
     def criarExercicio():
         try:
             data = request.get_json()
+            
+            if not data:
+                return jsonify({"error": "JSON inválido ou vazio"}), 400
+            
             exercicio = data.get('exercicio')
             repeticao = data.get('repeticao')
             serie = data.get('serie')
@@ -28,9 +32,6 @@ class ExercicioControler:
     @staticmethod
     def excluirExercicio(id_exercicio):
         try:
-            data = request.get_json()
-            id_exercicio = data.get('id_exercicio')
-
             repository = Repository()
             repository.removeExercicio(id_exercicio)
 
@@ -47,6 +48,10 @@ class ExercicioControler:
         try:
 
             data = request.get_json()
+
+            if not data:
+                return jsonify({"error": "JSON inválido ou vazio"}), 400
+
             exercicio = data.get('exercicio')
             repeticao = data.get('repeticao')
             serie = data.get('serie')
