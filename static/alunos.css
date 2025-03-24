@@ -3,7 +3,23 @@
    height: 20rem;
 }
 
+
+
 .modalContainer{
     display: flex;
     flex-direction: column;
+}
+
+.closeBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+.submitBtn{
+    display: flex;
+    justify-content: center;
+}
+
+.btn.btn-secondary {
+    width: 3rem;
+    padding: 0px;
 }
