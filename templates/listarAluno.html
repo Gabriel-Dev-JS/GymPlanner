@@ -17,10 +17,17 @@
         <div class="screen-name-and-logo">
 
             <span class="d-flex align-items-center">LISTA DE ALUNOS</span>
-            <button type="button" class="btn btn-success" onclick="document.getElementById('criarAluno').showModal()">
-                Criar Aluno
-            </button>
+            <div class="buttons">
+                <button type="button" class="btn btn-success"
+                    onclick="document.getElementById('criarAluno').showModal()">
+                    Criar Aluno
+                </button>
+                <a href="{{ url_for('exercicio_routes.criarExercicioView') }}" class="btn btn-primary">
+                    Montar Treino
+                </a>
+                
 
+            </div>
         </div>
         <div class="card-body">
             <dialog id="criarAluno" style="border-radius: 1rem;">
@@ -38,11 +45,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="sobrenone" class="form-label">Sobrenome</label>
-                            <input type="sobrenone" class="form-control" id="sobrenone" placeholder="Sobrenome do aluno" required>
+                            <input type="sobrenone" class="form-control" id="sobrenone" placeholder="Sobrenome do aluno"
+                                required>
                         </div>
                         <div class="submitBtn">
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
-                    </div>
+                            <button type="submit" class="btn btn-success">Cadastrar</button>
+                        </div>
                     </form>
                 </div>
             </dialog>
