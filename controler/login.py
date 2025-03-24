@@ -19,8 +19,9 @@ class Login:
             repository = Repository()
             professor = repository.findProfessor(nome=nomeProfessor, senha=senhaProfessor)
 
-            
             if professor:
-                return redirect(url_for('listarAlunos'))
+                return jsonify({"nome":professor.nome ,"id":professor.id}), 201
+            else:
+                return jsonify({"Error": "credenciais invalidas"}), 401
         except Exception as e:
             return jsonify({"Error": str(e)}), 400
