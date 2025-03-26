@@ -17,10 +17,17 @@
         <div class="screen-name-and-logo">
 
             <span class="d-flex align-items-center">LISTA DE ALUNOS</span>
-            <button type="button" class="btn btn-success" onclick="document.getElementById('criarAluno').showModal()">
-                Criar Aluno
-            </button>
+            <div class="buttons">
+                <button type="button" class="btn btn-success"
+                    onclick="document.getElementById('criarAluno').showModal()">
+                    Criar Aluno
+                </button>
+                <a href="{{ url_for('exercicio_routes.criarExercicioView') }}" class="btn btn-primary">
+                    Montar Treino
+                </a>
+                
 
+            </div>
         </div>
         <div class="card-body">
             <dialog id="criarAluno" style="border-radius: 1rem;">
@@ -31,16 +38,19 @@
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <form>
+                    <form id="formCadastraAluno">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="nome" placeholder="Nome do aluno" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="email" placeholder="E-mail do aluno" required>
+                            <label for="sobrenome" class="form-label">Sobrenome</label>
+                            <input type="sobrenome" class="form-control" id="sobrenome" placeholder="Sobrenome do aluno"
+                                required>
                         </div>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                        <div class="submitBtn">
+                            <button type="submit" class="btn btn-success" id="cadastrarAluno">Cadastrar</button>
+                        </div>
                     </form>
                 </div>
             </dialog>
@@ -69,7 +79,6 @@
                             <a href="#" class="btn btn-danger">Excluir</a>
                         </td>
                     </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
                 </tbody>
             </table>
 
