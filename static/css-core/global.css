@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700;900&family=Outfit:wght@300;500;800&display=swap');
+
+
+
+:root {
+    --text-white: #FFF;
+    --ff-poppins: 'Inter', sans-serif;
+    --text-dark-blue: #19286b;
+    --font-low: 0.5rem;
+    --font-medium: 0.8rem;
+    --font-normal: 1rem;
+    --font-high: 1.3rem;
+
+
+    --light: #ffffff;
+    --success: #188918;
+    --error: #9B1B12;
+    --warning: #BF8705;
+    --info: #008084;
+
+}
+
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--body-color);
+    font-family: var(--ff-poppins);
+}
+
+header {
+    font-family: var(--ff-poppins);
+    background-color: var(--company-color);
+    color: var(--text-white);
+    padding: 16px 0;
+    font-size: var(--font-high);
+    text-align: center;
+    margin-bottom: 1.2rem;
+}
+
+.card-header {
+    border: 0;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding-block: 1rem;
+}
+
+.card-header .screen-name-and-logo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 2rem;
+}
+
+.card-header .screen-name-and-logo span {
+    font-family: var(--ff-poppins);
+    font-weight: 700;
+    font-size: var(--font-high);
+    text-transform: uppercase;
+    color: #19286b;
+}
+
+.card-header .screen-name-and-logo img {
+    width: auto;
+    height: 50px;
+}
+
+.card-body {
+    padding-inline: 3rem;
+    padding-block: 2rem;
+}
+
+.card-body .scroll {
+    overflow-x: scroll;
+}
+
+.card-body .paginate-export {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul.pagination {
+    margin: 0;
+}
+
+
+form label span {
+    color: red;
+}
+
+.card {
+    margin: 5rem;
+    border-radius: 10px !important;
+    border: none;
+    box-shadow: 0px 0px 8px 1px rgba(2, 41, 62, 0.2);
+}
+
+.form-control-sm {
+    border-radius: 8px;
+}
+
+
+.btn-company,
+.btn-company:hover,
+.btn-company:active {
+    background-color: green;
+    color: white;
+    border: green;
+}
+
+.btn {
+    font-size: 0.8rem;
+    width: 150px;
+
+}
+
+.btn-secondary {
+    height: 31px;
+}
+
+.btn-edit {
+    background-color: #3747a5;
+}
+
+.btn.btn-sm {
+    height: 30px;
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+}
+
+#formFilter {
+    display: flex;
+}
+
+input[readonly] {
+    background-color: #f2f2f2;
+    color: #888;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    opacity: 0.6;
+}
+
+.label-for-input-file {
+    text-align: center;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    cursor: pointer;
+}
+
+
+input.disabled {
+    background-color: #e8e8e8;
+}
+
+input[readonly] {
+    color: #000;
+}
+
