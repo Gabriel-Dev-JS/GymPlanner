@@ -1,10 +1,14 @@
 from flask import jsonify,request
+from db import conexao
 from repository import Repository
 
 class ExercicioControler:
     @staticmethod
-    def criarExercicio():
+    def criarExercicio(id_aluno, id_professor):
         try:
+
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
             data = request.get_json()
             
             if not data:
@@ -13,10 +17,13 @@ class ExercicioControler:
             exercicio = data.get('exercicio')
             repeticao = data.get('repeticao')
             serie = data.get('serie')
-            id_aluno = data.get('id_aluno')
 
-            repository = Repository()
-            repository.createExercicio(exercicio, repeticao, serie, id_aluno)
+            professor = repository.findProfessorId(id_professor=id_professor)
+
+            if not professor:
+                return jsonify({"Error": "Professor não encontrado"}), 400
+            
+            repository.createExercicio(exercicio=exercicio, repeticao=repeticao, serie=serie, id_aluno=id_aluno, id_professor=id_professor)
 
             response = {
                 "message": "Exercicio criado com sucesso",
@@ -30,10 +37,11 @@ class ExercicioControler:
 
 
     @staticmethod
-    def excluirExercicio(id_exercicio):
+    def excluirExercicio(id_exercicio,id_aluno, id_professor):
         try:
-            repository = Repository()
-            repository.removeExercicio(id_exercicio)
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
+            repository.removeExercicio(id_exercicio=id_exercicio, id_aluno=id_aluno, id_professor=id_professor)
 
             response = {
                 "message": "Exercicio excluido com sucesso"
@@ -44,7 +52,7 @@ class ExercicioControler:
             return jsonify({"error":str(e)}), 400 
         
     @staticmethod    
-    def AtualizarExercicio(id_exercicio):
+    def AtualizarExercicio(id_exercicio, id_aluno, id_professor):
         try:
 
             data = request.get_json()
@@ -56,8 +64,9 @@ class ExercicioControler:
             repeticao = data.get('repeticao')
             serie = data.get('serie')
 
-            repository = Repository()
-            repository.updateExercio(exercicio, repeticao, serie, id_exercicio)
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
+            repository.updateExercio(exercicio=exercicio, repeticao=repeticao, serie=serie, id_exercicio=id_exercicio, id_aluno=id_aluno, id_professor=id_professor)
 
             response = {
                 "message": "exercicio atualizado com sucesso",
@@ -72,12 +81,13 @@ class ExercicioControler:
             return jsonify({"error": str(e)}), 400
 
     @staticmethod    
-    def listaExercicios(id_aluno):
+    def listarExercicios(id_aluno, id_professor):
         try:
-            repository = Repository()
-            repository.findAllExercicio(id_aluno)
-
-
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
+            response = repository.findAllExercicio(id_aluno=id_aluno,id_professor=id_professor)
+            return jsonify({"exercicio":response}), 201
+            # return jsonify({"exercicio":"response"}), 201
         except Exception as e:
             return jsonify({"error": str(e)}), 401
         

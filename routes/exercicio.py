@@ -5,10 +5,10 @@ from controler.criarExercicio import ExercicioControler
 exercicio_routes = Blueprint('exercicio_routes', __name__)
 
 #rotas de CRUD exercicio
-exercicio_routes.route('/aluno/<int:id_aluno>', methods=["POST"])(ExercicioControler.criarExercicio)
-exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_exercicio>', methods=["PUT"])(ExercicioControler.AtualizarExercicio)
-exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_exercicio>', methods=["DELETE"])(ExercicioControler.excluirExercicio)
-exercicio_routes.route('/aluno/<int:id_aluno>', methods=["GET"])(ExercicioControler.listaExercicios)
+exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>', methods=["POST"])(ExercicioControler.criarExercicio)
+exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_exercicio>/<int:id_professor>', methods=["PUT"])(ExercicioControler.AtualizarExercicio)
+exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_exercicio>/<int:id_professor>', methods=["DELETE"])(ExercicioControler.excluirExercicio)
+exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>', methods=["GET"])(ExercicioControler.listarExercicios)
 
 
 #rota view cadastro exercicio
@@ -22,7 +22,7 @@ def loginView():
     return render_template("login.html")
 
 #rota view listar Alunos
-@exercicio_routes.route('/listaAlunos', methods=["GET"])
+@exercicio_routes.route('/listarAlunos', methods=["GET"])
 def listarAlunoView():
     return render_template("listarAluno.html")
 

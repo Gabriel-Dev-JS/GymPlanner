@@ -10,7 +10,7 @@ class Repository:
 
     def createTableProfessor(self):
         query = """CREATE TABLE IF NOT EXISTS professor (
-        id_professor INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+        id_professor INTEGER PRIMARY KEY NOT NULL,
         nome TEXT,
         sobrenome TEXT,
         email TEXT,
@@ -24,9 +24,11 @@ class Repository:
 
     def createTableAluno(self):
         query = """CREATE TABLE IF NOT EXISTS aluno (
-        id_aluno INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+        id_aluno INTEGER PRIMARY KEY NOT NULL,
         nome TEXT,
         sobrenome TEXT,
+        email TEXT,
+        senha TEXT,
         id_professor INTEGER,
         FOREIGN KEY (id_professor) REFERENCES professor (id_professor)
         )"""
@@ -36,11 +38,10 @@ class Repository:
     
     def createTableExercicio(self):
         query = """CREATE TABLE IF NOT EXISTS exercicio (
-        id_exercicio INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+        id_exercicio INTEGER PRIMARY KEY NOT NULL,
         exercicio TEXT,
         repeticao INTEGER,
         serie INTEGER,
-        data DATE NOT NULL,
         id_aluno INTEGER,
         id_professor INTEGER,
         FOREIGN KEY (id_aluno) REFERENCES aluno (id_aluno)
@@ -55,29 +56,34 @@ class Repository:
         self.cursor.execute(query, (nome,sobrenome,email,senha))
         self.conexao.commit()
     
-    def createAluno(self, nome, sobrenome, id_professor):
-        query = "INSERT INTO aluno (nome,sobrenome,id_professor) VALUES (?,?,?)"
-        self.cursor.execute(query, (nome, sobrenome, id_professor))
+    def createAluno(self, nome, sobrenome, email, senha, id_professor):
+        query = "INSERT INTO aluno (nome,sobrenome,email,senha,id_professor) VALUES (?,?,?,?,?)"
+        self.cursor.execute(query, (nome, sobrenome, email, senha, id_professor))
         self.conexao.commit()
 
-    def createExercicio(self, exercicio, repeticao, serie, id_aluno):
-        query = "INSERT INTO exercicio (exercicio,repeticao,serie, id_aluno) VALUES (?,?,?,?)"
-        self.cursor.execute(query, (exercicio, repeticao, serie, id_aluno))
+    def createExercicio(self, exercicio, repeticao, serie, id_aluno, id_professor):
+        query = "INSERT INTO exercicio (exercicio,repeticao,serie, id_aluno,id_professor) VALUES (?,?,?,?,?)"
+        self.cursor.execute(query, (exercicio, repeticao, serie, id_aluno, id_professor))
         self.conexao.commit()
 
-    def findProfessor(self, nome, senha):
-        query = "SELECT * FROM professor WHERE nome=? and senha=?"
-        self.cursor.execute(query,(nome, senha))
+    def findProfessor(self, email, senha):
+        query = "SELECT * FROM professor WHERE email=? and senha=?"
+        self.cursor.execute(query,(email, senha))
         return self.cursor.fetchone()
-
-    def findAllAluno(self):
-        query = "SELECT * FROM aluno"
-        self.cursor.execute(query)
+    
+    def findProfessorId(self, id_professor):
+        query = "SELECT * FROM professor WHERE id_professor=?"
+        self.cursor.execute(query,(id_professor,))
+        return self.cursor.fetchone()
+  
+    def findAllAluno(self, id_professor):
+        query = "SELECT * FROM aluno WHERE id_professor = ?"
+        self.cursor.execute(query,(id_professor))
         return self.cursor.fetchall()
    
-    def findAllExercicio(self, id_aluno):
-        query = "SELECT * FROM exercicio WHERE id_aluno = ?"
-        self.cursor.execute(query, (id_aluno))
+    def findAllExercicio(self, id_aluno, id_professor):
+        query = "SELECT * FROM exercicio WHERE id_aluno=? and id_professor=?"
+        self.cursor.execute(query, (id_aluno,id_professor))
         return self.cursor.fetchall()
 
     def updateAluno(self, nome, sobrenome, id_aluno):
@@ -85,9 +91,9 @@ class Repository:
         self.cursor.execute(query, (nome, sobrenome, id_aluno))
         self.conexao.commit()  
         
-    def updateExercio(self, exercicio, repeticao, serie, id_exercicio):
-        query = "UPDATE exercicio SET exercicio=?,repeticao=?,serie=? WHERE id_exercicio=?"
-        self.cursor.execute(query, (exercicio, repeticao, serie, id_exercicio))
+    def updateExercio(self, exercicio, repeticao, serie, id_exercicio, id_aluno, id_professor):
+        query = "UPDATE exercicio SET exercicio=?,repeticao=?,serie=? WHERE id_exercicio=? and id_aluno=? and id_professor=?"
+        self.cursor.execute(query, (exercicio, repeticao, serie, id_exercicio, id_aluno, id_professor))
         self.conexao.commit()
 
     def removeAluno(self, id_aluno):
@@ -95,9 +101,9 @@ class Repository:
         self.cursor.execute(query, (id_aluno,))
         self.conexao.commit()
     
-    def removeExercicio(self, id_exercicio):
-        query = "DELETE FROM exercicio WHERE id_exercicio=?"
-        self.cursor.execute(query, (id_exercicio,))
+    def removeExercicio(self, id_exercicio, id_aluno, id_professor):
+        query = "DELETE FROM exercicio WHERE id_exercicio=? and id_aluno=? and id_professor=?"
+        self.cursor.execute(query, (id_exercicio,id_aluno, id_professor))
         self.conexao.commit()
 
     def fechar_conexao(self):
