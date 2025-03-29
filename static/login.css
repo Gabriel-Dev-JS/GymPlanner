@@ -1,7 +1,30 @@
-.container{
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    background-color: blanchedalmond; 
-    height: 800px;
+.cardForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 25%;
+    height: 40%;
 }
+.submitBtn{
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+}
+
+.btn.btn-primary{
+    width: 60%;
+    background-color: rgb(115, 145, 190);
+}
+
+label {
+    display: block;
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+    width: 100%;
+}
+
