@@ -4,7 +4,7 @@ from repository import Repository
 
 class ExercicioControler:
     @staticmethod
-    def criarExercicio(id_aluno, id_professor):
+    def criarExercicio(tipo, id_aluno, id_professor):
         try:
 
             conexao_bd = conexao('GymPlanner.db')
@@ -23,14 +23,16 @@ class ExercicioControler:
             if not professor:
                 return jsonify({"Error": "Professor não encontrado"}), 400
             
-            repository.createExercicio(exercicio=exercicio, repeticao=repeticao, serie=serie, id_aluno=id_aluno, id_professor=id_professor)
+            repository.createExercicio(tipo=tipo, exercicio=exercicio, repeticao=repeticao, serie=serie, id_aluno=id_aluno, id_professor=id_professor)
 
             response = {
                 "message": "Exercicio criado com sucesso",
+                "tipo":tipo,
                 "exercicio": exercicio,
                 "repeticao": repeticao,
                 "serie": serie
             }
+
             return jsonify(response), 201
         except Exception as e:
             return jsonify({"error": str(e)}), 400
@@ -86,8 +88,30 @@ class ExercicioControler:
             conexao_bd = conexao('GymPlanner.db')
             repository = Repository(conexao_bd)
             response = repository.findAllExercicio(id_aluno=id_aluno,id_professor=id_professor)
-            return jsonify({"exercicio":response}), 201
-            # return jsonify({"exercicio":"response"}), 201
+            
+            return jsonify({"exercicio":response}), 201 
+        except Exception as e:
+            return jsonify({"error": str(e)}), 401
+        
+    @staticmethod    
+    def listarExerciciosTipo(tipo, id_aluno, id_professor):
+        try:
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
+            data = repository.findTipoExercicio(tipo=tipo, id_aluno=id_aluno,id_professor=id_professor)
+            response = []
+            for i in data:
+                response.append(
+                {   
+                    "tipo":i[1],
+                    "exercicio":i[2],
+                    "repeticao":i[3],
+                    "serie":i[4],
+                    "carga":i[5]
+                }
+                )
+                    
+            return jsonify({"exercicio":response}), 201 
         except Exception as e:
             return jsonify({"error": str(e)}), 401
         
