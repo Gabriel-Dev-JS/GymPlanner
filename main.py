@@ -2,7 +2,7 @@ from flask import Flask
 from repository import Repository
 from routes.exercicio import exercicio_routes
 from routes.listarAlunos import listar_alunos
-from routes.alunos import cadastrar_alunos
+from routes.cadastrarAlunos import cadastrar_alunos
 from routes.login import login
 from db import conexao
 
