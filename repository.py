@@ -82,6 +82,11 @@ class Repository:
         query = "SELECT * FROM aluno WHERE id_professor = ?"
         self.cursor.execute(query,(id_professor,))
         return self.cursor.fetchall()
+    
+    def findAluno(self, id_professor, email):
+        query = "SELECT email FROM aluno WHERE id_professor = ? and email=?"
+        self.cursor.execute(query,(id_professor,email))
+        return self.cursor.fetchone()
    
     def findAllExercicio(self, id_aluno, id_professor):
         query = "SELECT * FROM exercicio WHERE id_aluno=? and id_professor=?"

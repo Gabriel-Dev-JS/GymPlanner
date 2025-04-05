@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from controler.exercicio import ExercicioControler
 
@@ -12,9 +12,12 @@ exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>/', methods=["GE
 exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>/<tipo>', methods=["GET"])(ExercicioControler.listarExerciciosTipo)
 
 #rota view cadastro exercicio
-@exercicio_routes.route('/exercicio', methods=["GET"])
-def criarExercicioView():
-    return render_template("cadastrarExercicio.html")
+# @exercicio_routes.route('/exercicio', methods=["GET","POST"])
+# @exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>/<tipo>', methods=["GET","POST"])(ExercicioControler.criarExercicio)
+# def criarExercicioView(id_aluno, id_professor):
+#     if request.method == "POST":
+#         ExercicioControler.criarExercicio(id_aluno=id_aluno, id_professor=id_professor)
+#     return render_template("cadastrarExercicio.html")
 
 #rota view login    
 @exercicio_routes.route('/login', methods=["GET"])
@@ -25,4 +28,5 @@ def loginView():
 @exercicio_routes.route('/listarAlunos', methods=["GET"])
 def listarAlunoView():
     return render_template("listarAluno.html")
+
 

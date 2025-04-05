@@ -99,18 +99,25 @@ class ExercicioControler:
             conexao_bd = conexao('GymPlanner.db')
             repository = Repository(conexao_bd)
             data = repository.findTipoExercicio(tipo=tipo, id_aluno=id_aluno,id_professor=id_professor)
+
             response = []
+
+            tipo = list(map(lambda val: val[1], data))
+
+            if not tipo:
+                return jsonify({"error": "Tipo não encontrado"}), 401
+
             for i in data:
                 response.append(
-                {   
-                    "tipo":i[1],
-                    "exercicio":i[2],
-                    "repeticao":i[3],
-                    "serie":i[4],
-                    "carga":i[5]
-                }
+                    {   
+                        "tipo":i[1],
+                        "exercicio":i[2],
+                        "repeticao":i[3],
+                        "serie":i[4],
+                        "carga":i[5]
+                    }
                 )
-                    
+
             return jsonify({"exercicio":response}), 201 
         except Exception as e:
             return jsonify({"error": str(e)}), 401

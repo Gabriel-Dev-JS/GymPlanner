@@ -17,12 +17,15 @@ class CadastrarAluno:
 
 
             professor = repository.findProfessorId(id_professor=id_professor)
+            aluno = repository.findAluno(id_professor=id_professor, email=email)
 
             if not professor:
                 return jsonify({"Erro": "Professor não encontrado"}), 400
+            
+            if aluno:
+                return jsonify({"Erro": "Usuario já cadastrado"}), 401
 
             repository.createAluno(nome=nome, sobrenome=sobrenome, email=email, senha=senha, id_professor=id_professor)
-            print({"nome": nome})
             return jsonify({"nome":nome}), 201
         except Exception as e:
             return jsonify({"Error": str(e)}), 400
