@@ -21,8 +21,5 @@ def criarExercicioView():
 def loginView():
     return render_template("login.html")
 
-#rota view listar Alunos
-@exercicio_routes.route('/listarAlunos', methods=["GET"])
-def listarAlunoView():
-    return render_template("listarAluno.html")
+
 
