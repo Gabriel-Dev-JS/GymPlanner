@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, redirect, url_for 
 from repository import Repository
 from routes.exercicio import exercicio_routes
 from routes.listarAlunos import listar_alunos

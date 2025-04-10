@@ -11,16 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             tbody.innerHTML = "";
 
-          
+            console.log(data)
             data.forEach(aluno => {
                 const row = document.createElement("tr");
 
                 row.innerHTML = `
-                    <td>${aluno[0]}</td>
-                    <td>${aluno[1]} ${aluno[2]}</td> 
+                    <td>${aluno.id}</td>
+                    <td>${aluno.nome} ${aluno.sobrenome}</td> 
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm">Editar</a>
-                        <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+                        <a href="#" class="btn btn-primary btn-sm">Ver Aluno</a>
+                        <a href="#" class="btn btn-danger btn-sm">Excluir Aluno</a>
                     </td>
                 `;
 
