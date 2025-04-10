@@ -19,7 +19,7 @@ document.querySelector('#enviar')?.addEventListener('click', async (e) => {
         } 
         localStorage.setItem("token",id)
         const token = localStorage.getItem("token")
-        window.location.href = `http://127.0.0.1:5000/alunos/${token}`
+        window.location.href = `http://127.0.0.1:5000/listarAlunos/${token}`
     }catch(error){
         console.error("error", error)
     }
