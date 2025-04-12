@@ -29,5 +29,38 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error(error);
-        });
+        });       
 });
+
+
+document.querySelector("#cadastrarAluno").addEventListener("click", async (e) => {
+    const token = localStorage.getItem("token")
+    const url = `http://127.0.0.1:5000/listarAlunos/${token}`
+    e.preventDefault();
+    const emailAluno = document.getElementById("emailAluno").value
+    const senhaAluno = document.getElementById("senhaAluno").value
+    const nomeAluno = document.getElementById("nomeAluno").value
+    const sobrenomeAluno = document.getElementById("sobrenomeAluno").value
+
+    const formData = {
+        nome: nomeAluno,
+        sobrenome: sobrenomeAluno,
+        email: emailAluno,
+        senha: senhaAluno
+    }
+    
+    try{
+        await fetch(url,{
+            method:"POST",
+            headers:{
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        location.reload()
+    }catch(error){
+        alert('já existe um aluno com este email')
+        console.error("Erro", error)
+        throw new Error("Erro")
+    }
+})
