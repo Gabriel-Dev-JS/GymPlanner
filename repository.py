@@ -80,6 +80,17 @@ class Repository:
         query = "SELECT * FROM aluno WHERE email = ?"
         self.cursor.execute(query,(email,))
         return self.cursor.fetchall()
+
+    def findAlunoId(self, id_professor, id_aluno):
+        query = """
+            SELECT e.id_professor , e.exercicio, e.repeticao , e.serie , a.nome, a.id_aluno  
+            FROM exercicio e 
+            LEFT JOIN  aluno a  ON e.id_aluno = a.id_aluno 
+            WHERE e.id_professor=?  AND a.id_aluno=?; 
+        """
+        self.cursor.execute(query,(id_professor, id_aluno))
+        return self.cursor.fetchall()
+    
     def findAllAluno(self, id_professor):
         query = "SELECT * FROM aluno WHERE id_professor = ?"
         self.cursor.execute(query,(id_professor,))
@@ -100,9 +111,9 @@ class Repository:
         self.cursor.execute(query, (exercicio, repeticao, serie, id_exercicio, id_aluno, id_professor))
         self.conexao.commit()
 
-    def removeAluno(self, id_aluno):
-        query = "DELETE FROM aluno WHERE id_aluno=?"
-        self.cursor.execute(query, (id_aluno,))
+    def removeAluno(self, id_professor, id_aluno):
+        query = "DELETE FROM aluno WHERE id_professor=? and id_aluno=?"
+        self.cursor.execute(query, (id_professor, id_aluno))
         self.conexao.commit()
     
     def removeExercicio(self, id_exercicio, id_aluno, id_professor):
