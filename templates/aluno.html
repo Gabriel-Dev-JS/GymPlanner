@@ -1,4 +1,4 @@
-<div class="modal fade" id="criarAlunoModal" tabindex="-1" aria-labelledby="criarAlunoModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="criarAlunoModal" tabindex="-1" aria-labelledby="criarAlunoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -15,7 +15,6 @@
               <label for="email" class="form-label">E-mail</label>
               <input type="email" class="form-control" id="email" placeholder="E-mail do aluno" required>
             </div>
-            <!-- Adicione outros campos conforme necessário -->
           </form>
         </div>
         <div class="modal-footer">
@@ -25,4 +24,105 @@
       </div>
     </div>
   </div>
-  
+   -->
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alunos</title>
+    <style>
+      body{
+        padding: 0px;
+        margin: 0px;
+      }
+      .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: red;
+      }
+
+      .containerFilho{
+        background-color: blue;
+        width: 90%;
+        height: 90%;
+        border-radius: 20px;
+        /* padding: 20px; */
+      }
+
+      .header{
+        background-color: rgb(201, 190, 190);
+        width: 100%;
+        height: 10%;
+        border-radius: 20px 20px 0px 0px;
+      }
+
+      .header-filho{
+        padding: 20px;
+      }
+
+      .tabela{
+        padding: 20px;
+      }
+
+      .linha{
+        padding: 20px;
+      }
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="containerFilho">
+      <div class="header"><div class="header-filho"></div><div></div>
+    </div>
+    <div class="container-filho2">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th scope="col">Exercicio</th>
+            <th scope="col">Série</th>
+            <th scope="col">Repetição</th>
+          </tr>
+        </thead>
+        
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const pathName = window.location.pathname
+      fetch(`http://127.0.0.1:5000/api${pathName}`,{
+        method:"GET",
+        headers:{
+          "content-type": "application/json"
+        }
+      }).then(res => res.json()).then(data => 
+     { 
+       document.querySelector(".header-filho").innerHTML = `${data.nome} ${data.sobrenome}`
+       data.treino.map(val => {
+        document.querySelector(".tabela").insertAdjacentHTML("beforeend", `
+          <tbody>
+            <tr>  
+              <td class="linha">${val.exercicios}</td>
+              <td class="linha">${val.serie}</td>
+              <td class="linha">${val.repetição}</td>
+            </tr>  
+          </tbody>
+        `)
+       
+        console.log(val.repetição)
+      })
+    }
+    ).catch(error => console.error("Error", error))
+  })
+  </script>
+</body>
+</html>
