@@ -28,13 +28,11 @@ class ListarAlunos:
             return jsonify({"Error":str(e)}), 400
         
     @staticmethod
-    def excluirAluno(id_professor):
+    def excluirAluno(id_professor, id_aluno):
         conexao_bd = conexao('GymPlanner.db')
         repository = Repository(conexao_bd)
         
         try:
-            data = request.get_json()
-            id_aluno = data.get('id_aluno')
             repository.removeAluno(id_professor=id_professor, id_aluno=id_aluno)
             return jsonify({"Aluno deletado": id_aluno}), 201
         except Exception as e:

@@ -4,7 +4,7 @@ from controler.listarAlunos import ListarAlunos
 listar_alunos = Blueprint("listar_alunos", __name__)
 controler = ListarAlunos()
 
-listar_alunos.route('/listarAlunos/<int:id_professor>', methods=["DELETE"])(ListarAlunos.excluirAluno)
+listar_alunos.route('/listarAlunos/<int:id_professor>/<int:id_aluno>', methods=["DELETE"])(ListarAlunos.excluirAluno)
 
 @listar_alunos.route('/cadastrarAluno', methods=["GET"])
 def modalCriarAlunoView():
@@ -14,10 +14,6 @@ def modalCriarAlunoView():
 def listarAlunoView(id_professor):
     return render_template("listarAluno.html")
 
-@listar_alunos.route('/api/alunos/<int:id_professor>', methods=["GET"])
+@listar_alunos.route('/api/listarAlunos/<int:id_professor>', methods=["GET"])
 def listar_alunos_api(id_professor):
     return controler.listarAlunos(id_professor)  # Retorna o JSON
-
-# @listar_alunos.route('/listarAlunos/<int:id_professor>', methods=["DELETE"])
-# def listarAlunoView(id_professor):
-#     return render_template("listarAluno.html")

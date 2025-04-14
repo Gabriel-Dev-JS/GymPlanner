@@ -83,10 +83,10 @@ class Repository:
 
     def findAlunoId(self, id_professor, id_aluno):
         query = """
-            SELECT e.id_professor , e.exercicio, e.repeticao , e.serie , a.nome, a.id_aluno  
+            SELECT e.id_exercicio, e.id_professor , e.exercicio, e.repeticao , e.serie , a.nome, a.sobrenome, a.id_aluno  
             FROM exercicio e 
             LEFT JOIN  aluno a  ON e.id_aluno = a.id_aluno 
-            WHERE e.id_professor=?  AND a.id_aluno=?; 
+            WHERE e.id_professor=? AND a.id_aluno=?; 
         """
         self.cursor.execute(query,(id_professor, id_aluno))
         return self.cursor.fetchall()
@@ -96,10 +96,10 @@ class Repository:
         self.cursor.execute(query,(id_professor,))
         return self.cursor.fetchall()
    
-    def findAllExercicio(self, id_aluno, id_professor):
-        query = "SELECT * FROM exercicio WHERE id_aluno=? and id_professor=?"
-        self.cursor.execute(query, (id_aluno,id_professor))
-        return self.cursor.fetchall()
+    # def findAllExercicio(self, id_aluno, id_professor):
+    #     query = "SELECT * FROM exercicio WHERE id_aluno=? and id_professor=?"
+    #     self.cursor.execute(query, (id_aluno,id_professor))
+    #     return self.cursor.fetchall()
 
     def updateAluno(self, nome, sobrenome, id_aluno):
         query = "UPDATE aluno SET nome=?,sobrenome=? WHERE id_aluno=?"
