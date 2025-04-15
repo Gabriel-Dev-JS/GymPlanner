@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${aluno.nome} ${aluno.sobrenome}</td> 
                     <td>
                         <a href="http://127.0.0.1:5000/aluno/${idProfessor}/${aluno.id}" class="btn btn-primary btn-sm">Ver Aluno</a>
-                        <a onClick="deletarAluno(${aluno.id})" class="btn btn-danger btn-sm">Excluir Aluno</a>
+                        <a onClick="destroyConfirm(${aluno.id})" class="btn btn-danger btn-sm">Excluir Aluno</a>
                     </td>
                 `;
 
@@ -65,6 +65,16 @@ document.querySelector("#cadastrarAluno").addEventListener("click", async (e) =>
     }
 })
 
+
+function destroyConfirm(id) {
+    dyoxfy(
+      "warning",
+      `Você realmente deseja excluir o aluno?<br>
+       <button onclick="deletarAluno(${id})" class="btn btn-danger btn-sm mt-2">Confirmar exclusão</button>`
+    );
+  }
+  
+
 const deletarAluno = async (id_aluno) => {
     const token = localStorage.getItem("token")
     try{
@@ -75,6 +85,7 @@ const deletarAluno = async (id_aluno) => {
             },
         })
         location.reload()
+        dyoxfy('success', 'Aluno excluído com sucesso!');
     }catch(error){
         console.error("Erro", error)
         throw new Error("Impossivel deletar este usuario")

@@ -1,0 +1,167 @@
+.xfy-notifications {
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 9999;
+  
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+  }
+  
+  .dyoxfy-notifications :where(.dyoxfy-toast, .column) {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dyoxfy-notifications .dyoxfy-toast {
+    width: fit-content;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    border-radius: 4px;
+    padding: 16px 17px;
+    margin-bottom: 10px;
+    background: var(--light);
+    justify-content: space-between;
+    animation: show_toast 0.3s ease forwards;
+  }
+  
+  @keyframes show_toast {
+    0% {
+      transform: translateX(100%);
+    }
+  
+    40% {
+      transform: translateX(-5%);
+    }
+  
+    80% {
+      transform: translateX(0%);
+    }
+  
+    100% {
+      transform: translateX(-10px);
+    }
+  }
+  
+  .dyoxfy-notifications .dyoxfy-toast.hide {
+    animation: hide_toast 0.3s ease forwards;
+  }
+  
+  @keyframes hide_toast {
+    0% {
+      transform: translateX(-10px);
+    }
+  
+    40% {
+      transform: translateX(0%);
+    }
+  
+    80% {
+      transform: translateX(-5%);
+    }
+  
+    100% {
+      transform: translateX(calc(100% + 20px));
+    }
+  }
+  
+  .dyoxfy-toast::before {
+    position: absolute;
+    content: "";
+    height: 3px;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    animation: progress 5s linear forwards;
+  }
+  
+  @keyframes progress {
+    100% {
+      width: 0%;
+    }
+  }
+  
+  .dyoxfy-toast.success::before,
+  .btn#success {
+    background: var(--success);
+  }
+  
+  .dyoxfy-toast.error::before,
+  .btn#error {
+    background: var(--error);
+  }
+  
+  .dyoxfy-toast.warning::before,
+  .btn#warning {
+    background: var(--warning);
+  }
+  
+  .dyoxfy-toast.info::before,
+  .btn#info {
+    background: var(--info);
+  }
+  
+  .dyoxfy-toast .column i {
+    font-size: 1.75rem;
+  }
+  
+  .dyoxfy-toast.success .column i {
+    color: var(--success);
+  }
+  
+  .dyoxfy-toast.error .column i {
+    color: var(--error);
+  }
+  
+  .dyoxfy-toast.warning .column i {
+    color: var(--warning);
+  }
+  
+  .dyoxfy-toast.info .column i {
+    color: var(--info);
+  }
+  
+  .dyoxfy-toast .column span {
+    font-size: 1.07rem;
+    margin-left: 12px;
+  }
+  
+  .dyoxfy-toast i:last-child {
+    color: #aeb0d7;
+    cursor: pointer;
+  }
+  
+  .dyoxfy-toast i:last-child:hover {
+    color: var(--dark);
+  }
+  
+  .buttons .btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 5px;
+    color: var(--light);
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+  
+  @media screen and (max-width: 530px) {
+    .dyoxfy-notifications {
+      width: 95%;
+    }
+  
+    .dyoxfy-notifications .dyoxfy-toast {
+      width: 100%;
+      font-size: 1rem;
+      margin-left: 20px;
+    }
+  
+    .buttons .btn {
+      margin: 0 1px;
+      font-size: 1.1rem;
+      padding: 8px 15px;
+    }
+  }
