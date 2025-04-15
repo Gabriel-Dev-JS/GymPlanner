@@ -85,9 +85,27 @@ class ExercicioControler:
         try:
             conexao_bd = conexao('GymPlanner.db')
             repository = Repository(conexao_bd)
-            response = repository.findAllExercicio(id_aluno=id_aluno,id_professor=id_professor)
-            return jsonify({"exercicio":response}), 201
-            # return jsonify({"exercicio":"response"}), 201
+
+            exercicio = repository.findAlunoId(id_professor=id_professor, id_aluno=id_aluno)
+            
+            exercicios = list(map(lambda i: {
+            "id_exercicio": i[0],
+            "exercicios": i[2],
+            "serie": i[3],
+            "repetição": i[4],
+            }, exercicio))
+
+            return jsonify({"treino":exercicios, "nome":exercicio[0][5], "sobrenome":exercicio[0][6]}), 201
         except Exception as e:
-            return jsonify({"error": str(e)}), 401
+            return jsonify({"Error": str(e)}), 400
+   
+    # def listarExercicios(id_aluno, id_professor):
+    #     try:
+    #         conexao_bd = conexao('GymPlanner.db')
+    #         repository = Repository(conexao_bd)
+    #         response = repository.findAllExercicio(id_aluno=id_aluno,id_professor=id_professor)
+    #         return jsonify({"exercicio":response}), 201
+    #         # return jsonify({"exercicio":"response"}), 201
+    #     except Exception as e:
+    #         return jsonify({"error": str(e)}), 401
         

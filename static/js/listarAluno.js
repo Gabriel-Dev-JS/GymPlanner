@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const url = window.location.pathname;
     const idProfessor = url.split("/").pop();
 
-    fetch(`/api/alunos/${idProfessor}`)
+    fetch(`/api/listarAlunos/${idProfessor}`)
         .then(response => {
             return response.json();
         })
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${aluno.id}</td>
                     <td>${aluno.nome} ${aluno.sobrenome}</td> 
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm">Ver Aluno</a>
-                        <a href="#" class="btn btn-danger btn-sm">Excluir Aluno</a>
+                        <a href="http://127.0.0.1:5000/aluno/${idProfessor}/${aluno.id}" class="btn btn-primary btn-sm">Ver Aluno</a>
+                        <a onClick="deletarAluno(${aluno.id})" class="btn btn-danger btn-sm">Excluir Aluno</a>
                     </td>
                 `;
 
@@ -64,3 +64,20 @@ document.querySelector("#cadastrarAluno").addEventListener("click", async (e) =>
         throw new Error("Erro")
     }
 })
+
+const deletarAluno = async (id_aluno) => {
+    const token = localStorage.getItem("token")
+    try{
+        await fetch(`http://127.0.0.1:5000/listarAlunos/${token}/${id_aluno}`, {
+            method:"DELETE",
+            headers:{
+                "content-type": "application/json"
+            },
+        })
+        location.reload()
+    }catch(error){
+        console.error("Erro", error)
+        throw new Error("Impossivel deletar este usuario")
+    }
+
+}
