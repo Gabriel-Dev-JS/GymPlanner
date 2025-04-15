@@ -60,9 +60,8 @@ document.getElementById("addExercicio").addEventListener("click", function() {
 });
 
 document.getElementById("removeExercicio").addEventListener("click", function() {
-    // Seleciona o último conjunto de campos de exercício e o remove
     var campos = document.getElementById("camposExercicio");
-    if (campos.children.length > 1) {
+    if (campos.children.length > 5) {
         campos.removeChild(campos.lastElementChild);
     } else {
         alert("Você deve manter ao menos um exercício.");
