@@ -32,3 +32,39 @@ document.getElementById('formExercicio').addEventListener('submit', function(eve
         alert('Erro ao criar exercício');
     });
 });
+
+document.getElementById("addExercicio").addEventListener("click", function() {
+    var novoExercicio = document.createElement("div");
+
+    novoExercicio.innerHTML = `
+    <hr>
+        <div class="mb-3">
+            <label for="exercicio" class="form-label">Exercício</label>
+            <input type="text" class="form-control" name="exercicio[]" placeholder="Exemplo: Supino Reto com Barra">
+        </div>
+        <div class="mb-3">
+            <label for="repeticao" class="form-label">Repetição</label>
+            <input type="number" class="form-control" name="repeticao[]" required>
+        </div>
+        <div class="mb-3">
+            <label for="serie" class="form-label">Série</label>
+            <input type="number" class="form-control" name="serie[]" required>
+        </div>
+        <div class="mb-3">
+            <label for="carga" class="form-label">Carga</label>
+            <input type="text" class="form-control" name="carga[]" placeholder="3 kg" required>
+        </div>
+    `;
+    
+    document.getElementById("camposExercicio").appendChild(novoExercicio);
+});
+
+document.getElementById("removeExercicio").addEventListener("click", function() {
+    // Seleciona o último conjunto de campos de exercício e o remove
+    var campos = document.getElementById("camposExercicio");
+    if (campos.children.length > 1) {
+        campos.removeChild(campos.lastElementChild);
+    } else {
+        alert("Você deve manter ao menos um exercício.");
+    }
+});
