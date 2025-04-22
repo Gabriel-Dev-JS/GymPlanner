@@ -42,6 +42,7 @@ class Repository:
         exercicio TEXT,
         repeticao INTEGER,
         serie INTEGER,
+        tipo TEXT,
         id_aluno INTEGER,
         id_professor INTEGER,
         FOREIGN KEY (id_aluno) REFERENCES aluno (id_aluno)
@@ -61,9 +62,9 @@ class Repository:
         self.cursor.execute(query, (nome, sobrenome, email, senha, id_professor))
         self.conexao.commit()
 
-    def createExercicio(self, exercicio, repeticao, serie, id_aluno, id_professor):
-        query = "INSERT INTO exercicio (exercicio,repeticao,serie, id_aluno,id_professor) VALUES (?,?,?,?,?)"
-        self.cursor.execute(query, (exercicio, repeticao, serie, id_aluno, id_professor))
+    def createExercicio(self, exercicio, repeticao, serie, tipo, id_aluno, id_professor):
+        query = "INSERT INTO exercicio (exercicio,repeticao,serie, tipo, id_aluno,id_professor) VALUES (?,?,?,?,?,?)"
+        self.cursor.execute(query, (exercicio, repeticao, serie, tipo, id_aluno, id_professor))
         self.conexao.commit()
 
     def findProfessor(self, email, senha):
@@ -83,7 +84,7 @@ class Repository:
 
     def findAlunoId(self, id_professor, id_aluno):
         query = """
-            SELECT e.id_exercicio, e.id_professor , e.exercicio, e.repeticao , e.serie , a.nome, a.sobrenome, a.id_aluno  
+            SELECT e.id_exercicio, e.id_professor , e.exercicio, e.repeticao , e.serie, e.tipo, a.nome, a.sobrenome, a.id_aluno  
             FROM exercicio e 
             LEFT JOIN  aluno a  ON e.id_aluno = a.id_aluno 
             WHERE e.id_professor=? AND a.id_aluno=?; 
