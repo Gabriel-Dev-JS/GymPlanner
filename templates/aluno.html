@@ -74,6 +74,21 @@
       .linha{
         padding: 20px;
       }
+      
+      .linhaButton{
+        display: flex;
+        flex-direction: column;
+        gap:5px;
+      }
+      
+      .btnLinha{
+        border-radius: 5px;
+      }
+      
+      .btnLinha:hover{
+        cursor: pointer;
+        scale: 1.1;
+      }
 
     </style>
 </head>
@@ -89,6 +104,7 @@
             <th scope="col">Exercicio</th>
             <th scope="col">Série</th>
             <th scope="col">Repetição</th>
+            <th scope="col">Tipo</th>
           </tr>
         </thead>
         
@@ -106,19 +122,23 @@
         }
       }).then(res => res.json()).then(data => 
      { 
-       document.querySelector(".header-filho").innerHTML = `${data.nome} ${data.sobrenome}`
-       data.treino.map(val => {
+      //  document.querySelector(".header-filho").innerHTML = `${data.nome} ${data.sobrenome}`
+       document.querySelector(".header-filho").innerHTML = `${(data.nome && data.nome + " " + data.sobrenome) ?? ""}`
+       data.treino.map(val => { 
         document.querySelector(".tabela").insertAdjacentHTML("beforeend", `
           <tbody>
             <tr>  
               <td class="linha">${val.exercicios}</td>
               <td class="linha">${val.serie}</td>
               <td class="linha">${val.repetição}</td>
+              <td class="linha">${val.tipo}</td>
+              <td class="linhaButton" style>
+                <input class="btnLinha" onClick="console.log(${val.id_exercicio})" type="button" value="Alterar exercicio"/>
+                <input class="btnLinha" onClick="console.log(${val.id_exercicio})" type="button" value="Excluir exercicio"/>
+              </td>
             </tr>  
           </tbody>
         `)
-       
-        console.log(val.repetição)
       })
     }
     ).catch(error => console.error("Error", error))

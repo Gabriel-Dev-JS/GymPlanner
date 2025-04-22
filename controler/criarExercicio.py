@@ -17,19 +17,21 @@ class ExercicioControler:
             exercicio = data.get('exercicio')
             repeticao = data.get('repeticao')
             serie = data.get('serie')
+            tipo = data.get('tipo')
 
             professor = repository.findProfessorId(id_professor=id_professor)
 
             if not professor:
                 return jsonify({"Error": "Professor não encontrado"}), 400
             
-            repository.createExercicio(exercicio=exercicio, repeticao=repeticao, serie=serie, id_aluno=id_aluno, id_professor=id_professor)
+            repository.createExercicio(exercicio=exercicio, repeticao=repeticao, serie=serie, tipo=tipo, id_aluno=id_aluno, id_professor=id_professor)
 
             response = {
                 "message": "Exercicio criado com sucesso",
                 "exercicio": exercicio,
                 "repeticao": repeticao,
-                "serie": serie
+                "serie": serie,
+                "tipo":tipo
             }
             return jsonify(response), 201
         except Exception as e:
@@ -91,11 +93,12 @@ class ExercicioControler:
             exercicios = list(map(lambda i: {
             "id_exercicio": i[0],
             "exercicios": i[2],
-            "serie": i[3],
-            "repetição": i[4],
+            "repetição": i[3],
+            "serie": i[4],
+            "tipo": i[5],
             }, exercicio))
 
-            return jsonify({"treino":exercicios, "nome":exercicio[0][5], "sobrenome":exercicio[0][6]}), 201
+            return jsonify({"treino":exercicios, "nome":exercicio[0][6], "sobrenome":exercicio[0][7]}), 201
         except Exception as e:
             return jsonify({"Error": str(e)}), 400
    
