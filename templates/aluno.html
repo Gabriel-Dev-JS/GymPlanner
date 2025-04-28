@@ -113,19 +113,107 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const pathName = window.location.pathname
-      fetch(`http://127.0.0.1:5000/api${pathName}`,{
-        method:"GET",
-        headers:{
-          "content-type": "application/json"
-        }
-      }).then(res => res.json()).then(data => 
-     { 
-      //  document.querySelector(".header-filho").innerHTML = `${data.nome} ${data.sobrenome}`
-       document.querySelector(".header-filho").innerHTML = `${(data.nome && data.nome + " " + data.sobrenome) ?? ""}`
-       data.treino.map(val => { 
-        document.querySelector(".tabela").insertAdjacentHTML("beforeend", `
+  //   var storage
+  //   const btnTipo = (tipo) =>{
+  //     storage = storage.setItem('tipo',tipo)
+  //     location.reload()
+  //   } 
+  //   document.addEventListener("DOMContentLoaded", () => {
+  //     const pathName = window.location.pathname
+  //     fetch(`http://127.0.0.1:5000/api${pathName}`,{
+  //       method:"GET",
+  //       headers:{
+  //         "content-type": "application/json"
+  //       }
+  //     }).then(res => res.json()).then(data => 
+  //    { 
+  //     //  document.querySelector(".header-filho").innerHTML = `${data.nome} ${data.sobrenome}`
+  //      document.querySelector(".header-filho").innerHTML = `${(data.nome && data.nome + " " + data.sobrenome) ?? ""}`
+
+      
+
+  //      const tiposUnicos = [...new Set(data.treino.map(val => val.tipo))];
+
+  //       // tiposUnicos.forEach(tipo => {
+  //       //   document.querySelector(".header-filho").insertAdjacentHTML("beforeend", `
+  //       //     <button onClick="btnTipo(${tipo})">${tipo}</button>
+  //       //   `);
+  //       // });
+  //       tiposUnicos.forEach(tipo => {
+  //         const button = document.createElement("button");
+  //         button.textContent = tipo;
+  //         button.addEventListener("click", () => btnTipo(tipo));
+  //         document.querySelector(".header-filho").appendChild(button);
+  //       });
+
+  //     if(val.tipo === storage){
+  //       data.treino.map(val => {
+  //          document.querySelector(".tabela").insertAdjacentHTML("beforeend", `
+  //            <tbody>
+  //              <tr>  
+  //                <td class="linha">${val.exercicios}</td>
+  //                <td class="linha">${val.serie}</td>
+  //                <td class="linha">${val.repetição}</td>
+  //                <td class="linha">${val.tipo}</td>
+  //                <td class="linhaButton" style>
+  //                  <input class="btnLinha" onClick="console.log(${val.id_exercicio})" type="button" value="Alterar exercicio"/>
+  //                  <input class="btnLinha" onClick="console.log(${val.id_exercicio})" type="button" value="Excluir exercicio"/>
+  //                </td>
+  //              </tr>  
+  //            </tbody>
+  //          `)
+  //        })
+  //     }
+  //   }
+  //   ).catch(error => console.error("Error", error))
+  // })
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const pathName = window.location.pathname;
+  const storage = localStorage.getItem("tipo"); 
+
+  const btnTipo = (tipo) => {
+    localStorage.setItem("tipo", tipo);
+    location.reload();
+  };
+
+  fetch(`http://127.0.0.1:5000/api${pathName}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      document.querySelector(".header-filho").innerHTML = `${
+        (data.nome && data.nome + " " + data.sobrenome) ?? ""
+      }`;
+
+      const tiposUnicos = [...new Set(data.treino.map((val) => val.tipo))];
+
+      tiposUnicos.forEach((tipo) => {
+        const button = document.createElement("button");
+        button.textContent = tipo;
+        button.addEventListener("click", () => btnTipo(tipo));
+        document.querySelector(".header-filho").appendChild(button);
+      });
+
+      const btnTodos = document.createElement("button");
+      btnTodos.textContent = "Todos";
+      btnTodos.addEventListener("click", () => {
+        localStorage.removeItem("tipo"); 
+        location.reload();
+      });
+      document.querySelector(".header-filho").appendChild(btnTodos);
+
+      const treinoFiltrado = storage
+        ? data.treino.filter((val) => val.tipo === storage)
+        : data.treino;
+
+      treinoFiltrado.forEach((val) => {
+        document.querySelector(".tabela").insertAdjacentHTML(
+          "beforeend",
+          `
           <tbody>
             <tr>  
               <td class="linha">${val.exercicios}</td>
@@ -138,11 +226,11 @@
               </td>
             </tr>  
           </tbody>
-        `)
-      })
-    }
-    ).catch(error => console.error("Error", error))
-  })
+        `
+        );
+      });
+    });
+  });
   </script>
 </body>
 </html>

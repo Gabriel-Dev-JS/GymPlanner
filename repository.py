@@ -122,6 +122,11 @@ class Repository:
         self.cursor.execute(query, (id_exercicio,id_aluno, id_professor))
         self.conexao.commit()
 
+    def findExercicioTipo(self, tipo):
+        query = "SELECT exercicio, serie, repeticao FROM exercicio WHERE tipo=?"
+        self.cursor.execute(query, tipo)
+        self.conexao.commit()
+
     def fechar_conexao(self):
         return self.conexao.close()
 
