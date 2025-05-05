@@ -16,4 +16,4 @@ def listarAlunoView(id_professor):
 
 @listar_alunos.route('/api/listarAlunos/<int:id_professor>', methods=["GET"])
 def listar_alunos_api(id_professor):
-    return controler.listarAlunos(id_professor)  # Retorna o JSON
+    return controler.listarAlunos(id_professor)  
