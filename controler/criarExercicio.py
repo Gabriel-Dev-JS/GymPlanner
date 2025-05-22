@@ -147,13 +147,26 @@ class ExercicioControler:
         except Exception as e:
             return jsonify({"Error": str(e)}), 400
    
-    # def listarExercicios(id_aluno, id_professor):
-    #     try:
-    #         conexao_bd = conexao('GymPlanner.db')
-    #         repository = Repository(conexao_bd)
-    #         response = repository.findAllExercicio(id_aluno=id_aluno,id_professor=id_professor)
-    #         return jsonify({"exercicio":response}), 201
-    #         # return jsonify({"exercicio":"response"}), 201
-    #     except Exception as e:
-    #         return jsonify({"error": str(e)}), 401
+    def listarExerciciosAluno(id_aluno):
+        try:
+            conexao_bd = conexao('GymPlanner.db')
+            repository = Repository(conexao_bd)
+            response = repository.findExercicio(id_aluno=id_aluno)
+
+            exercicios = list(map(lambda i: {
+                'exercicios': i[1],
+                'serie': i[2],
+                'repetição': i[3]
+            }, response))
+
+            # exercicios = []
+            # for i in response:
+            #     exercicios.append({
+            #         'exercicios': i[1],
+            #         'serie': i[2],
+            #         'repetição': i[3]
+            #     })
+            return jsonify({"exercicio":exercicios}), 201
+        except Exception as e:
+            return jsonify({"error": str(e)}), 401
         
