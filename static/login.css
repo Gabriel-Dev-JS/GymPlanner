@@ -6,8 +6,10 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 25%;
-    height: 40%;
+    width: 50%;
+    height: 60%;
+    /* width: 25%;
+    height: 40%; */
 }
 .submitBtn{
     display: flex;

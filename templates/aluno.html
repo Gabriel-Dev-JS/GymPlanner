@@ -171,10 +171,10 @@
 
   document.addEventListener("DOMContentLoaded", () => {
   const pathName = window.location.pathname;
-  const storage = localStorage.getItem("tipo"); 
+  const storage = sessionStorage.getItem("tipo"); 
 
   const btnTipo = (tipo) => {
-    localStorage.setItem("tipo", tipo);
+    sessionStorage.setItem("tipo", tipo);
     location.reload();
   };
 
@@ -202,7 +202,7 @@
       const btnTodos = document.createElement("button");
       btnTodos.textContent = "Todos";
       btnTodos.addEventListener("click", () => {
-        localStorage.removeItem("tipo"); 
+        sessionStorage.removeItem("tipo"); 
         location.reload();
       });
       document.querySelector(".header-filho")?.appendChild(btnTodos);
@@ -233,16 +233,16 @@
               // <input class="btnLinha" id="alterarExercicio-${index}" type="button" value="Alterar exercicio"/>
       
       const abrirModalExcluir = document.querySelector(`#excluirExercicio-${index}`)?.addEventListener('click', ()=>{
-        localStorage.setItem("id_exercicio", val.id_exercicio)
-        localStorage.setItem("tipo", val.tipo)
-        localStorage.setItem("tipo", val.tipo)
+        sessionStorage.setItem("id_exercicio", val.id_exercicio)
+        sessionStorage.setItem("tipo", val.tipo)
+        sessionStorage.setItem("tipo", val.tipo)
         modalExcluir.showModal()
         document.querySelector('.textModalExcluir').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
       });
       
       const abrirModalAlterar = document.querySelector(`#alterarExercicio-${index}`)?.addEventListener('click', ()=>{
-        localStorage.setItem("id_exercicio", val.id_exercicio)
-        localStorage.setItem("tipo", val.tipo)
+        sessionStorage.setItem("id_exercicio", val.id_exercicio)
+        sessionStorage.setItem("tipo", val.tipo)
         modalAlterar.showModal()
         document.querySelector('.textModalAlterar').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
       });
@@ -268,8 +268,8 @@
     const exercicio = document.querySelector("#exercicio").value
     const repeticao = document.querySelector("#repeticao").value
     const serie = document.querySelector("#serie").value
-    const id_exercicio = localStorage.getItem('id_exercicio')
-    const tipo = localStorage.getItem('tipo')
+    const id_exercicio = sessionStorage.getItem('id_exercicio')
+    const tipo = sessionStorage.getItem('tipo')
   
     try{
       const dados = {
@@ -297,8 +297,8 @@
     const url = location.pathname.split("/")
     const id_professor = url[2]
     const id_aluno = url[3]
-    const id_exercicio = localStorage.getItem('id_exercicio')
-    const tipo = localStorage.getItem('tipo')
+    const id_exercicio = sessionStorage.getItem('id_exercicio')
+    const tipo = sessionStorage.getItem('tipo')
 
     
     try{

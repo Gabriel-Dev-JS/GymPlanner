@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.querySelector("#cadastrarAluno").addEventListener("click", async (e) => {
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
     const url = `http://127.0.0.1:5000/listarAlunos/${token}`
     e.preventDefault();
     const emailAluno = document.getElementById("emailAluno").value
@@ -66,7 +66,7 @@ document.querySelector("#cadastrarAluno").addEventListener("click", async (e) =>
 })
 
 const deletarAluno = async (id_aluno) => {
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
     try{
         await fetch(`http://127.0.0.1:5000/listarAlunos/${token}/${id_aluno}`, {
             method:"DELETE",

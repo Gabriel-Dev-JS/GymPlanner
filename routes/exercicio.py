@@ -7,7 +7,6 @@ exercicio_routes = Blueprint('exercicio_routes', __name__)
 exercicio_routes.route('/api/aluno/<int:id_professor>/<int:id_aluno>', methods=["POST"])(ExercicioControler.criarExercicio)
 exercicio_routes.route('/api/aluno/<int:id_professor>/<int:id_aluno>/<int:id_exercicio>/<string:tipo>', methods=["PUT"])(ExercicioControler.AtualizarExercicio)
 exercicio_routes.route('/api/aluno/<int:id_professor>/<int:id_aluno>/<int:id_exercicio>/<string:tipo>', methods=["DELETE"])(ExercicioControler.excluirExercicio)
-# exercicio_routes.route('/aluno/<int:id_aluno>/<int:id_professor>', methods=["GET"])(ExercicioControler.listarExercicios)
 
 @exercicio_routes.route('/aluno/<int:id_professor>/<int:id_aluno>', methods=["GET"])
 def alunos(id_professor, id_aluno):
