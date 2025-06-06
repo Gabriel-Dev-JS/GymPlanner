@@ -1,9 +1,11 @@
 #criarAluno {
    width: 50rem;
-   height: 20rem;
+   height: 55vh;
 }
 
-
+.formCadastraAluno{
+    height: 80vh;
+}
 
 .modalContainer{
     display: flex;
@@ -23,3 +25,4 @@
     width: 3rem;
     padding: 0px;
 }
+

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${aluno.id}</td>
                     <td>${aluno.nome} ${aluno.sobrenome}</td> 
                     <td>
-                        <a href="http://127.0.0.1:5000/aluno/${idProfessor}/${aluno.id}" class="btn btn-primary btn-sm">Ver Aluno</a>
+                        <a href="http://127.0.0.1:5000/aluno/${idProfessor}/${aluno.id}" class="btn btn-primary btn-sm">Visualizar Exercícios</a>
                         <a onClick="deletarAluno(${aluno.id})" class="btn btn-danger btn-sm">Excluir Aluno</a>
                     </td>
                 `;

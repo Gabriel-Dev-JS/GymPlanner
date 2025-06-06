@@ -1,114 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css-core/tableResponsive.css">
+  <link rel="stylesheet" href="/static/css-core/global.css">
+  <link rel="stylesheet" href="/static/css-core/bs5.css">
+  <link rel="stylesheet" href="/static/listarExercicio.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto%3Awght%40900&display=swap">
+  
   <title>Alunos</title>
-    <style>
-      body{
-        padding: 0px;
-        margin: 0px;
-      }
-      .container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100vw;
-        height: 100vh;
-        /* background-color: red; */
-      }
 
-      .containerFilho{
-        background-color: rgb(154, 141, 141);
-        width: 30%;
-        height: 90%;
-        border-radius: 20px;
-        overflow-y: auto;
-        /* padding: 20px; */
-      }
-
-      .header{
-        background-color: rgb(201, 190, 190);
-        width: 100%;
-        height: 10%;
-        border-radius: 20px 20px 0px 0px;
-        display: flex;
-        justify-content: space-between;
-      }
-      
-      .header-filho{
-        padding: 20px;
-        /* background-color: green; */
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .tabela{
-        padding: 20px;
-      }
-
-      .linha{
-        padding: 20px;
-      }
-      
-      .linhaButton{
-        display: flex;
-        flex-direction: column;
-        gap:5px;
-      }
-      
-      .btnLinha{
-        border-radius: 5px;
-      }
-      
-      .btnLinha:hover{
-        cursor: pointer;
-        scale: 1.1;
-      }
-
-  @media (max-width: 768px) {
-    .container {
-      height: auto;
-      padding: 20px 0; 
-    }
-
-    .containerFilho {
-      width: 90%;
-      height: 90%;
-      height: auto;
-      border-radius: 10px;
-      overflow-y: auto;
-    }
-
-    .header {
-      height: auto;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .header-filho,
-    .tabela,
-    .linha {
-      padding: 10px;
-    }
-
-    .linhaButton {
-      gap: 10px;
-      width: 100px;
-    }
-  }
-    </style>
 </head>
+
 <body>
 
   <dialog id="modalCriarExercicio">
     <div>
       <h1 class="textModalCriar"></h1>
-      <input type="text" id="criarExercicio" placeholder="Exercicio"/>
-      <input type="text" id="criarRepeticao" placeholder="Repetição"/>
-      <input type="text" id="criarSerie" placeholder="Serie"/>
-      <input type="text" id="tipo" placeholder="tipo"/>
+      <input type="text" id="criarExercicio" placeholder="Exercicio" />
+      <input type="text" id="criarRepeticao" placeholder="Repetição" />
+      <input type="text" id="criarSerie" placeholder="Serie" />
+      <input type="text" id="tipo" placeholder="tipo" />
       <button onclick="fecharModal()">Cancelar</button>
       <button onClick="criarExercicios()">Criar</button>
     </div>
@@ -123,9 +39,9 @@
   <dialog id="modalAlterarExercicio">
     <div>
       <h1 class="textModalAlterar"></h1>
-      <input type="text" id="exercicio" placeholder="Exercicio"/>
-      <input type="text" id="repeticao" placeholder="Repetição"/>
-      <input type="text" id="serie" placeholder="Serie"/>
+      <input type="text" id="exercicio" placeholder="Exercicio" />
+      <input type="text" id="repeticao" placeholder="Repetição" />
+      <input type="text" id="serie" placeholder="Serie" />
       <button onClick="fecharModal()">Cancelar</button>
       <button onClick="atualizarExercicio()">Alterar</button>
     </div>
@@ -133,219 +49,229 @@
 
   <div class="container">
     <div class="containerFilho">
-      <div class="header"><div class="header-filho"></div>
+      <div class="header">
+        <div class="header-filho"></div>
+      </div>
+      <div class="container-filho2">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th scope="col">Exercicio</th>
+              <th scope="col">Série</th>
+              <th scope="col">Repetição</th>
+              <th scope="col">Tipo</th>
+              <th scope="col"><button class="btnCreateExercicio"id="abrirModalExercicio">Criar Exercicio</th>
+            </tr>
+          </thead>
+
+        </table>
+      </div>
     </div>
-    <div class="container-filho2">
-      <table class="tabela">
-        <thead>
-          <tr>
-            <th scope="col">Exercicio</th>
-            <th scope="col">Série</th>
-            <th scope="col">Repetição</th>
-            <th scope="col">Tipo</th>
-            <th scope="col"><button style="border-radius: 5px;" id="abrirModalExercicio">Criar Exercicio</th>
-          </tr>
-        </thead>
-        
-      </table>
-    </div>
-  </div>
 
-  <script>
-  const modalExcluir = document.querySelector("#modalExcluirExercicio")
-  const modalAlterar = document.querySelector("#modalAlterarExercicio")
-  const modalCriar = document.querySelector('#modalCriarExercicio')
+    <script>
+      const modalExcluir = document.querySelector("#modalExcluirExercicio")
+      const modalAlterar = document.querySelector("#modalAlterarExercicio")
+      const modalCriar = document.querySelector('#modalCriarExercicio')
 
-  function fecharModal() {
-    document.querySelector("#criarExercicio").value = ""
-    document.querySelector("#criarRepeticao").value = ""
-    document.querySelector("#criarSerie").value = ""
-    document.querySelector("#tipo").value = ""
+      function fecharModal() {
+        document.querySelector("#criarExercicio").value = ""
+        document.querySelector("#criarRepeticao").value = ""
+        document.querySelector("#criarSerie").value = ""
+        document.querySelector("#tipo").value = ""
 
-    document.querySelector("#exercicio").value = ""
-    document.querySelector("#repeticao").value = ""
-    document.querySelector("#serie").value = ""
+        document.querySelector("#exercicio").value = ""
+        document.querySelector("#repeticao").value = ""
+        document.querySelector("#serie").value = ""
 
-    modalExcluir.close() ?? modalAlterar.close() ?? modalCriar.close()
-  }
+        modalExcluir.close() ?? modalAlterar.close() ?? modalCriar.close()
+      }
 
-  document.addEventListener("DOMContentLoaded", () => {
-  const pathName = window.location.pathname;
-  const storage = sessionStorage.getItem("tipo"); 
+      document.addEventListener("DOMContentLoaded", () => {
+        const pathName = window.location.pathname;
+        const storage = sessionStorage.getItem("tipo");
 
-  const btnTipo = (tipo) => {
-    sessionStorage.setItem("tipo", tipo);
-    location.reload();
-  };
+        const btnTipo = (tipo) => {
+          sessionStorage.setItem("tipo", tipo);
+          location.reload();
+        };
 
-  fetch(`http://127.0.0.1:5000/api${pathName}`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      document.querySelector(".header-filho").innerHTML = `${
-        (data?.nome && data?.nome + " " + data?.sobrenome) ?? ""
-      }`;
 
-      const tiposUnicos = [...new Set(data.treino?.map((val) => val.tipo))];
+        fetch(`http://127.0.0.1:5000/api${pathName}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const header = document.querySelector(".header-filho");
+            header.innerHTML = "";
 
-      tiposUnicos?.forEach((tipo) => {
-        const button = document.createElement("button");
-        button.textContent = tipo;
-        button.addEventListener("click", () => btnTipo(tipo));
-        document.querySelector(".header-filho").appendChild(button);
-      });
-      
-      const btnTodos = document.createElement("button");
-      btnTodos.textContent = "Todos";
-      btnTodos.addEventListener("click", () => {
-        sessionStorage.removeItem("tipo"); 
-        location.reload();
-      });
-      document.querySelector(".header-filho")?.appendChild(btnTodos);
+            const nomeCompleto = `${data?.nome ?? ""} ${data?.sobrenome ?? ""}`.trim();
+            const spanNome = document.createElement("span");
+            spanNome.classList.add("nome-aluno");
+            spanNome.textContent = nomeCompleto;
+            header.appendChild(spanNome);
 
-      const treinoFiltrado = storage
-        ? data?.treino?.filter((val) => val.tipo === storage)
-        : data?.treino;
+            const tiposUnicos = [...new Set(data.treino?.map((val) => val.tipo))];
 
-      treinoFiltrado?.forEach((val, index) => {
-        console.log(index)
-        document.querySelector(".tabela")?.insertAdjacentHTML(
-          "beforeend",
-          `
+            tiposUnicos?.forEach((tipo) => {
+              const button = document.createElement("button");
+              button.textContent = tipo;
+              button.classList.add("btn-tipo");
+              button.addEventListener("click", () => btnTipo(tipo));
+              header.appendChild(button);
+            });
+
+            const btnTodos = document.createElement("button");
+            btnTodos.textContent = "Todos";
+            btnTodos.classList.add("btn-tipo", "btn-todos");
+            btnTodos.addEventListener("click", () => {
+              sessionStorage.removeItem("tipo");
+              location.reload();
+            });
+            header.appendChild(btnTodos);
+
+            const treinoFiltrado = storage
+              ? data?.treino?.filter((val) => val.tipo === storage)
+              : data?.treino;
+
+            treinoFiltrado?.forEach((val, index) => {
+              console.log(index)
+              document.querySelector(".table")?.insertAdjacentHTML(
+                "beforeend",
+                `
           <tbody>
-            <tr>  
-              <td class="linha">${val.exercicios}</td>
-              <td class="linha">${val.serie}</td>
-              <td class="linha">${val.repetição}</td>
-              <td class="linha">${val.tipo}</td>
+            <tr class="item">  
+              <td>${val.exercicios}</td>
+              <td>${val.serie}</td>
+              <td>${val.repetição}</td>
+              <td>${val.tipo}</td>
               <td class="linhaButton" style>
-                <input class="btnLinha" id="alterarExercicio-${index}" type="button" value="Alterar exercicio">
-                <input class="btnLinha" id="excluirExercicio-${index}" type="button" value="Excluir exercicio"/>
+                <input class="btnLinha btnAlterar" id="alterarExercicio-${index}" type="button" value="Alterar exercicio">
+                <input class="btnLinha btnExcluir" id="excluirExercicio-${index}" type="button" value="Excluir exercicio"/>
                 </td>
                 </tr>  
                 </tbody>
                 `
               );
               // <input class="btnLinha" id="alterarExercicio-${index}" type="button" value="Alterar exercicio"/>
-      
-      const abrirModalExcluir = document.querySelector(`#excluirExercicio-${index}`)?.addEventListener('click', ()=>{
-        sessionStorage.setItem("id_exercicio", val.id_exercicio)
-        sessionStorage.setItem("tipo", val.tipo)
-        sessionStorage.setItem("tipo", val.tipo)
-        modalExcluir.showModal()
-        document.querySelector('.textModalExcluir').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
-      });
-      
-      const abrirModalAlterar = document.querySelector(`#alterarExercicio-${index}`)?.addEventListener('click', ()=>{
-        sessionStorage.setItem("id_exercicio", val.id_exercicio)
-        sessionStorage.setItem("tipo", val.tipo)
-        modalAlterar.showModal()
-        document.querySelector('.textModalAlterar').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
-      });
-      });
-  })
-  });
-  </script>
-  <script>
-      
-  </script>
 
-  <script>
-  
-  document.querySelector("#abrirModalExercicio").addEventListener('click', ()=> {
-  document.querySelector("#modalCriarExercicio").showModal()
-  });
+              const abrirModalExcluir = document.querySelector(`#excluirExercicio-${index}`)?.addEventListener('click', () => {
+                sessionStorage.setItem("id_exercicio", val.id_exercicio)
+                sessionStorage.setItem("tipo", val.tipo)
+                sessionStorage.setItem("tipo", val.tipo)
+                modalExcluir.showModal()
+                document.querySelector('.textModalExcluir').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
+              });
+
+              const abrirModalAlterar = document.querySelector(`#alterarExercicio-${index}`)?.addEventListener('click', () => {
+                sessionStorage.setItem("id_exercicio", val.id_exercicio)
+                sessionStorage.setItem("tipo", val.tipo)
+                modalAlterar.showModal()
+                document.querySelector('.textModalAlterar').innerHTML = `Deseja realmente excluir ${val.exercicios} ?`
+              });
+            });
+          })
+      });
+    </script>
+    <script>
+
+    </script>
+
+    <script>
+
+      document.querySelector("#abrirModalExercicio").addEventListener('click', () => {
+        document.querySelector("#modalCriarExercicio").showModal()
+      });
 
 
-  const atualizarExercicio = async () => {
-    const url = location.pathname.split("/")
-    const id_professor = url[2]
-    const id_aluno = url[3]
-    const exercicio = document.querySelector("#exercicio").value
-    const repeticao = document.querySelector("#repeticao").value
-    const serie = document.querySelector("#serie").value
-    const id_exercicio = sessionStorage.getItem('id_exercicio')
-    const tipo = sessionStorage.getItem('tipo')
-  
-    try{
-      const dados = {
-        exercicio:exercicio,
-        serie:serie,
-        repeticao:repeticao
+      const atualizarExercicio = async () => {
+        const url = location.pathname.split("/")
+        const id_professor = url[2]
+        const id_aluno = url[3]
+        const exercicio = document.querySelector("#exercicio").value
+        const repeticao = document.querySelector("#repeticao").value
+        const serie = document.querySelector("#serie").value
+        const id_exercicio = sessionStorage.getItem('id_exercicio')
+        const tipo = sessionStorage.getItem('tipo')
+
+        try {
+          const dados = {
+            exercicio: exercicio,
+            serie: serie,
+            repeticao: repeticao
+          }
+
+          await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}/${id_exercicio}/${tipo}`, {
+            method: 'PUT',
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(dados)
+          })
+
+          location.reload()
+        } catch (error) {
+          console.error(error)
+        }
       }
-    
-    await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}/${id_exercicio}/${tipo}`,{
-      method: 'PUT',
-      headers:{
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(dados)
-    })
-
-    location.reload()
-    }catch(error){
-      console.error(error)
-    }
-  }
 
 
-  const excluirExercicio = async () => {
-    const url = location.pathname.split("/")
-    const id_professor = url[2]
-    const id_aluno = url[3]
-    const id_exercicio = sessionStorage.getItem('id_exercicio')
-    const tipo = sessionStorage.getItem('tipo')
+      const excluirExercicio = async () => {
+        const url = location.pathname.split("/")
+        const id_professor = url[2]
+        const id_aluno = url[3]
+        const id_exercicio = sessionStorage.getItem('id_exercicio')
+        const tipo = sessionStorage.getItem('tipo')
 
-    
-    try{
-      await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}/${id_exercicio}/${tipo}`,{
-        method: 'DELETE',
-        headers:{
-        "content-type": "application/json"
+
+        try {
+          await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}/${id_exercicio}/${tipo}`, {
+            method: 'DELETE',
+            headers: {
+              "content-type": "application/json"
+            }
+          })
+          location.reload()
+        } catch (error) {
+          console.error(error)
+        }
       }
-    })
-      location.reload()
-    }catch(error){
-      console.error(error)
-    }
-  }
-    
-    
-  const criarExercicios = async () => {
-    const url = location.pathname.split("/")
-    const id_professor = url[2]
-    const id_aluno = url[3]
 
-    const exercicio = document.querySelector("#criarExercicio").value
-    const repeticao = document.querySelector("#criarRepeticao").value
-    const serie = document.querySelector("#criarSerie").value
-    const tipo = document.querySelector("#tipo").value
 
-    const formData = {
-      exercicio: exercicio,
-      repeticao: repeticao,
-      serie: serie,
-      tipo: tipo
-    }
-  
-    try{
-      await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}`,{
-        method: 'POST',
-        headers:{
-        "content-type": "application/json"
-      },
-      body:JSON.stringify(formData)
-    })
-      location.reload()
-    }catch(error){
-      console.error(error)
-    }
-  }
-    
-  </script>
+      const criarExercicios = async () => {
+        const url = location.pathname.split("/")
+        const id_professor = url[2]
+        const id_aluno = url[3]
+
+        const exercicio = document.querySelector("#criarExercicio").value
+        const repeticao = document.querySelector("#criarRepeticao").value
+        const serie = document.querySelector("#criarSerie").value
+        const tipo = document.querySelector("#tipo").value
+
+        const formData = {
+          exercicio: exercicio,
+          repeticao: repeticao,
+          serie: serie,
+          tipo: tipo
+        }
+
+        try {
+          await fetch(`http://127.0.0.1:5000/api/aluno/${id_professor}/${id_aluno}`, {
+            method: 'POST',
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify(formData)
+          })
+          location.reload()
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+    </script>
 </body>
+
 </html>
