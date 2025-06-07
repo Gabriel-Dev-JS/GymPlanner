@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             tbody.innerHTML = "";
 
-            console.log(data)
             data.forEach(aluno => {
                 const row = document.createElement("tr");
 
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {
             console.error(error);
         });       
-});
+    });
 
 
 document.querySelector("#cadastrarAluno").addEventListener("click", async (e) => {
@@ -80,4 +79,9 @@ const deletarAluno = async (id_aluno) => {
         throw new Error("Impossivel deletar este usuario")
     }
 
+    // document.querySelector('pesquisarAluno')?.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     const aluno = document.querySelector('#pesquisarAlunos').value
+        
+    // })
 }
