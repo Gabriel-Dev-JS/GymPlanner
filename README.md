@@ -1,7 +1,7 @@
 # Documentação do Sistema
 
 **INSIRA ESTE ARQUIVO NO GITHUB (DEIXE COMO RAW). COMPARTILHE O LINK COM O ORIENTADOR.**
-**profkesede64@gmail.com**
+**prof.turatti@gmail.com**
 
 ## SUMÁRIO
 
