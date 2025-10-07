@@ -1,9 +1,11 @@
 #criarAluno {
    width: 50rem;
-   height: 20rem;
+   height: 55vh;
 }
 
-
+.formCadastraAluno{
+    height: 80vh;
+}
 
 .modalContainer{
     display: flex;
@@ -22,4 +24,39 @@
 .btn.btn-secondary {
     width: 3rem;
     padding: 0px;
+}
+
+.logout {
+    width: fit-content;
+    cursor: pointer;
+}
+
+#modalLogout {
+    border-radius: 30px;
+}
+
+.modalExit {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btnLogout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.btnLogout #exit {
+    border-radius: 10px;
+    width: 30%;
+    background-color: #198754;
+}
+
+.btnLogout #notExit {
+    border-radius: 10px;
+    width: 30%;
+    background-color: #dc3545;
 }

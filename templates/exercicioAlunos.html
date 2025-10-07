@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alunos</title>
+    <style>
+      body{
+        padding: 0px;
+        margin: 0px;
+      }
+      .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        /* background-color: red; */
+      }
+
+      .containerFilho{
+        background-color: rgb(154, 141, 141);
+        width: 30%;
+        height: 90%;
+        border-radius: 20px;
+        overflow-y: auto;
+        /* padding: 20px; */
+      }
+
+      .header{
+        background-color: rgb(201, 190, 190);
+        width: 100%;
+        height: 10%;
+        border-radius: 20px 20px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .header-filho{
+        padding: 20px;
+        /* background-color: green; */
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .tabela{
+        padding: 20px;
+      }
+
+      .linha{
+        padding: 20px;
+      }
+      
+      .linhaButton{
+        display: flex;
+        flex-direction: column;
+        gap:5px;
+      }
+      
+      .btnLinha{
+        border-radius: 5px;
+      }
+      
+      .btnLinha:hover{
+        cursor: pointer;
+        scale: 1.1;
+      }
+
+  @media (max-width: 768px) {
+    .container {
+      height: auto;
+      padding: 20px 0; 
+    }
+
+    .containerFilho {
+      width: 90%;
+      height: 90%;
+      height: auto;
+      border-radius: 10px;
+      overflow-y: auto;
+    }
+
+    .header {
+      height: auto;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .header-filho,
+    .tabela,
+    .linha {
+      padding: 10px;
+    }
+
+    .linhaButton {
+      gap: 10px;
+      width: 100px;
+    }
+  }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="containerFilho">
+      <div class="header"><div class="header-filho"></div>
+    </div>
+    <div class="container-filho2">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th scope="col">Exercicio</th>
+            <th scope="col">Série</th>
+            <th scope="col">Repetição</th>
+          </tr>
+        </thead>
+        
+      </table>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const storage = sessionStorage.getItem("tipo"); 
+
+  const btnTipo = (tipo) => {
+    sessionStorage.setItem("tipo", tipo);
+    location.reload();
+  };
+  const token = sessionStorage.getItem('token')
+  fetch(`http://127.0.0.1:5000/api/exercicioAluno/${token}`, {
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      document.querySelector(".header-filho").innerHTML = `${
+        (data?.nome && data?.nome + " " + data?.sobrenome) ?? ""
+      }`;
+
+      console.log(data.exercicio?.map(val => val))
+      console.log(data)
+
+      const tiposUnicos = [...new Set(data.treino?.map((val) => val.tipo))];
+
+      tiposUnicos?.forEach((tipo) => {
+        const button = document.createElement("button");
+        button.textContent = tipo;
+        button.addEventListener("click", () => btnTipo(tipo));
+        document.querySelector(".header-filho").appendChild(button);
+      });
+      
+      const btnTodos = document.createElement("button");
+      btnTodos.textContent = "Todos";
+      btnTodos.addEventListener("click", () => {
+        sessionStorage.removeItem("tipo"); 
+        location.reload();
+      });
+      document.querySelector(".header-filho")?.appendChild(btnTodos);
+
+      const treinoFiltrado = storage
+        ? data?.treino?.filter((val) => val.tipo === storage)
+        : data?.treino;
+
+    //   treinoFiltrado?.forEach((val, index) => {
+      data.exercicio?.map((val, index) => {
+        console.log(index)
+        document.querySelector(".tabela")?.insertAdjacentHTML(
+          "beforeend",
+          `
+          <tbody>
+            <tr>  
+              <td class="linha">${val.exercicios}</td>
+              <td class="linha">${val.serie}</td>
+              <td class="linha">${val.repetição}</td>
+            </td>
+            </tr>  
+            </tbody>
+            `
+            );
+      });
+  })
+  });
+  </script>
+</body>
+</html>

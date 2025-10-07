@@ -1,7 +1,138 @@
-.container{
-    display: flex; 
-    justify-content: center; 
+.content {
+    display: flex;
+    height: 100vh;
+}
+
+.sideImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: blanchedalmond; 
-    height: 800px;
+    background-color: rgb(156, 156, 156);
+    height: 100vh;
+    width: 50%;
+}
+
+.logoAcademia {
+    padding-top: 2rem;
+    width: 25%;
+    height: 25%;
+}
+
+
+
+.cardform {
+    display: flex;
+    flex-direction: column;
+    border: 4px solid black;
+    width: 50%;
+    justify-content: start;
+    gap: 12rem;
+    align-items: center;
+    background-color: white;
+}
+
+.titleHeader {
+    padding-top: 2rem;
+}
+
+.identifTipoLogin {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3rem;
+}
+
+.radioInputs {
+    display: flex;
+    padding: 2rem;
+    flex-direction: row;
+    border-bottom: 4px solid black;
+    
+}
+
+.identifHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.identifTipoLogin label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.loginForm input {
+    width: 40rem;
+}
+
+.submitBtn {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+}
+
+.btn.btn-primary {
+    width: 60%;
+    background-color: rgb(115, 145, 190);
+}
+
+label {
+    display: block;
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+    width: 100%;
+}
+
+@media (max-width: 1280px) {
+    .loginForm input {
+        width: 30rem;
+    }
+}
+
+/* Media query para telas menores que 975px */
+@media (max-width: 975px) {
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .sideImage,
+    .cardform {
+        width: 100%;
+    }
+
+    .cardform {
+        gap: 3rem;
+    }
+
+    .loginForm input {
+        width: 25rem;
+    }
+
+    .btn.btn-primary {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .logoAcademia {
+        width: 30%;
+        height: auto;
+    }
+}
+
+@media (max-width: 815px) {
+
+    .sideImage {
+        display: none;
+    }
+
+    .loginForm input {
+        width: 20rem;
+    }
 }

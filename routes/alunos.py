@@ -1,6 +1,14 @@
-from flask import Blueprint, render_template
-from controler.cadastrarAluno import CadastrarAluno
+# from flask import Blueprint, render_template
 
-cadastrar_alunos = Blueprint("cadastrar_alunos", __name__)
-# cadastrar_alunos.route('/alunos/<int:id_professor>', methods=["POST"])(CadastrarAluno.cadastrarAluno)
-cadastrar_alunos.route('/listar-alunos/<int:id_professor>', methods=["POST"])(CadastrarAluno.cadastrarAluno)
+# alunos_bp = Blueprint("alunos", __name__)
+
+
+# @alunos_bp.route('/aluno/<int:id_professor>/<int:id_aluno>', methods=["GET"])
+# def alunos(id_professor, id_aluno):
+#     return render_template("aluno.html")
+
+
+# @alunos_bp.route('/aluno/<int:id_professor>/<int:id_aluno>', methods=["GET"])
+# def alunos_api(id_professor, id_aluno):
+#     return Alunos.alunos(id_professor, id_aluno)
+
