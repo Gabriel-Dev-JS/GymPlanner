@@ -23,30 +23,19 @@
 
 ---
 
-## Dados do Cliente
-
 **Título do Projeto:** GymPlanner
 
 **Descrição:** O projeto será responsável pelo gerenciamento dos treinos dos alunos, e será gerenciado pelo personal training. O personal irá cadastrar o aluno e montar o treino da pessoa pelo app, assim ele consegue ter um controle sobre o treino de cada aluno.
-
-**Cliente:** Rodrigo Orlandini  
-
-**CNPJ/CPF:** 48793569000188  
-
-**Contato:**  +55 19 98103-7274 
-
-**Email do contato:**  RodrigoOrlandiniWork@gmail.com
 
 ---
 
 ## Equipe de Desenvolvimento
 
-| Nome Completo | Curso | Disciplina |
-|--------------|-------|------------|
-| Fernando Rodrigues de Sousa | Análise e Desenvolvimento de Sistemas | Padrões de Projetos de Software com Java |
-| Victor Guilherme Alves Reis | Análise e Desenvolvimento de Sistemas | Padrões de Projetos de Software com Java |
+| Nome Completo                   | Curso                                 | Disciplina                               |
+| ------------------------------- | ------------------------------------- | ---------------------------------------- |
+| Fernando Rodrigues de Sousa     | Análise e Desenvolvimento de Sistemas | Padrões de Projetos de Software com Java |
+| Victor Guilherme Alves Reis     | Análise e Desenvolvimento de Sistemas | Padrões de Projetos de Software com Java |
 | Gabriel Luis Santos de Oliveira | Análise e Desenvolvimento de Sistemas | Padrões de Projetos de Software com Java |
-
 
 **Professor Orientador:** Kesede Rodrigues Julio
 
@@ -67,6 +56,7 @@ O objetivo principal do GymPlanner é automatizar e centralizar a gestão dos tr
 ## Escopo
 
 ### Funcionalidades Principais:
+
 - Cadastro de alunos e professores.
 - Criação e gerenciamento de planos de treino.
 - Acompanhamento do progresso do aluno.
@@ -78,29 +68,30 @@ O objetivo principal do GymPlanner é automatizar e centralizar a gestão dos tr
 ## Backlogs do Produto
 
 1. **Cadastro e Login**
+
    - Permitir que professores e alunos se cadastrem e façam login na plataforma.
 
 2. **Gerenciamento de Treinos**
+
    - Criar e editar treinos personalizados para cada aluno.
    - Definir séries, repetições e intervalos.
    - Histórico de treinos passados.
 
 3. **Notificações e Alertas**
    - Enviar lembretes para atualização de treinos.
-   
 
 ---
 
 ## Cronograma
 
-| Fase | Atividade | Período |Dia
-|------|----------|---------|---------|
-| Planejamento | Definição do escopo e requisitos | Semana 1-2 | dia 23/03/2025 a 05/04/2025
-| Desenvolvimento | Implementação do back-end (API) | Semana 3-6 | dia 06/04/2025 a 26/04/2025
-| Desenvolvimento | Implementação do front-end | Semana 7-10 | dia 27/04/2025 a 17/05/2025
-| Testes | Testes unitários e de integração | Semana 11-12 |  dia 18/05/2025 a 24/05/2025
-| Implantação | Deploy e ajustes finais | Semana 13 |dia 25/05/2025 a 31/05/2025
-| Homologação | Validação do MVP com usuários reais | Semana 14 |dia 01/06/2025 a 07/06/2025
+| Fase            | Atividade                           | Período      | Dia                         |
+| --------------- | ----------------------------------- | ------------ | --------------------------- |
+| Planejamento    | Definição do escopo e requisitos    | Semana 1-2   | dia 23/03/2025 a 05/04/2025 |
+| Desenvolvimento | Implementação do back-end (API)     | Semana 3-6   | dia 06/04/2025 a 26/04/2025 |
+| Desenvolvimento | Implementação do front-end          | Semana 7-10  | dia 27/04/2025 a 17/05/2025 |
+| Testes          | Testes unitários e de integração    | Semana 11-12 | dia 18/05/2025 a 24/05/2025 |
+| Implantação     | Deploy e ajustes finais             | Semana 13    | dia 25/05/2025 a 31/05/2025 |
+| Homologação     | Validação do MVP com usuários reais | Semana 14    | dia 01/06/2025 a 07/06/2025 |
 
 ---
 
